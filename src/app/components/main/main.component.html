@@ -1,5 +1,25 @@
 <main>
-  <h1>
-    {{ displayWeather?.address }}
-  </h1>
+  <div class="upperContainer">
+    <button>metric</button>
+    <button>us</button>
+
+    <div class="mainInfo">
+      <h1 class="city">
+        {{ displayWeather?.resolvedAddress }}
+      </h1>
+      <div class="underHeader" ng>
+        @if (displayWeather?.currentConditions?.conditions) {
+        <img
+          *ngIf="displayWeather?.currentConditions?.icon"
+          [src]="getWeatherIcon(displayWeather?.currentConditions?.icon)"
+          alt="Weather icon"
+        />
+        }
+        <p class="Temp">{{ displayWeather?.currentConditions?.temp }} °C</p>
+      </div>
+      <p class="condition">
+        {{ displayWeather?.currentConditions?.conditions }}
+      </p>
+    </div>
+  </div>
 </main>

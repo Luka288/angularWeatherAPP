@@ -1,7 +1,55 @@
+@import "../../shared/styles/mixins/mixins.scss";
 @import "../../shared/styles/variables/variables.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
 
 main {
   width: 100%;
   height: 100vh;
+  font-family: $main-font-roboto;
   background-color: $main-background-color;
+
+  .mainInfo {
+    width: 100%;
+    height: 200px;
+    @include flex();
+    color: $white-text;
+
+    .city {
+      text-transform: capitalize;
+      font-weight: 370;
+      color: $white-text;
+    }
+
+    .underHeader {
+      @include flex($justify: space-between, $direction: row);
+      gap: 5px;
+
+      p {
+        color: $white-text;
+        font-size: 10px;
+        font-weight: 250;
+      }
+
+      .Temp {
+        font-weight: 350;
+
+        .celsius {
+          font-size: 16px;
+        }
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    .condition {
+      font-size: 16px;
+      font-weight: 270;
+    }
+  }
 }
