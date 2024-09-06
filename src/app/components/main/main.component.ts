@@ -3,11 +3,12 @@ import { tap, catchError } from 'rxjs';
 import { WeatherAPIService } from '../../shared/services/weather-api.service';
 import { WeatherResponse } from '../../shared/interfaces/weatherInterface';
 import { CommonModule } from '@angular/common';
+import { DateFormatPipe } from "../../shared/pipes/date-format.pipe";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DateFormatPipe],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
@@ -15,6 +16,7 @@ export default class MainComponent {
   private readonly weatherAPI = inject(WeatherAPIService)
 
   displayWeather: WeatherResponse | null = null;
+  foreCast: WeatherResponse[] = [];
 
 
   readonly conditions: { [key: string]: string } = {
@@ -42,15 +44,12 @@ export default class MainComponent {
   }
 
   ngOnInit(): void {
-    this.loadWeather('batumi')
+    this.loadWeather('tbilisi')
   }
 
   loadWeather(location: string){
     this.weatherAPI.getWeather(location).pipe(tap(res => {
       this.displayWeather = res
-      res.days.forEach(element => {
-        console.log(element.icon)
-      })
       console.log(res)
     })
       ).subscribe()
