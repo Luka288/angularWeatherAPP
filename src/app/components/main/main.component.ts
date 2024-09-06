@@ -59,4 +59,5 @@ export default class MainComponent {
   getWeatherIcon(condition: string | undefined): string {
     return this.conditions[condition || 'Unknown'] || '';
   }
+
 }
