@@ -1,39 +1,56 @@
 <main>
-  <div class="upperContainer">
-    <div class="mainInfo">
-      <h1 class="city">
-        {{ displayWeather?.resolvedAddress }}
-      </h1>
-      <div class="underHeader" ng>
-        @if (displayWeather?.currentConditions?.conditions) {
-        <img
-          *ngIf="displayWeather?.currentConditions?.icon"
-          [src]="getWeatherIcon(displayWeather?.currentConditions?.icon)"
-          alt="Weather-icon"
-        />
-        }
-        <p class="Temp">{{ displayWeather?.currentConditions?.temp }} °C</p>
-      </div>
-      <p class="condition">
-        {{ displayWeather?.currentConditions?.conditions }}
-      </p>
+  <div class="wrapper">
+    <div class="hourly">
+      <h1>test</h1>
+      <h1>test</h1>
+      <h1>test</h1>
+      <h1>test</h1>
+      <h1>test</h1>
+      <h1>test</h1>
+      <h1>test</h1>
+      <h1>test</h1>
     </div>
-  </div>
+    <div class="secondBox">
+      <div class="upperContainer">
+        <div class="mainInfo">
+          <h1 class="city">
+            {{ displayWeather?.resolvedAddress }}
+          </h1>
+          <div class="underHeader" ng>
+            @if (displayWeather?.currentConditions?.conditions) {
+            <img
+              *ngIf="displayWeather?.currentConditions?.icon"
+              [src]="getWeatherIcon(displayWeather?.currentConditions?.icon)"
+              alt="Weather-icon"
+            />
+            }
+            <p class="Temp">{{ displayWeather?.currentConditions?.temp }} °C</p>
+          </div>
+          <p class="condition">
+            {{ displayWeather?.currentConditions?.conditions }}
+          </p>
+        </div>
+      </div>
 
-  <div class="foreCasts" *ngIf="displayWeather">
-    <div class="container">
-      <div class="card" *ngFor="let weather of displayWeather?.days">
-        <p class="date">
-          {{ weather.datetime }}
-        </p>
-        <p class="cityIcon">
-          {{ displayWeather.address }}
-          <span> <img [src]="getWeatherIcon(weather.icon)" alt="" /></span>
-        </p>
-        <p>{{ weather.temp }} °C</p>
-        <p class="desc">
-          {{ weather.description }}
-        </p>
+      <div class="foreCasts" *ngIf="displayWeather">
+        <div class="title">
+          <p class="titleText">15 day fore cast</p>
+        </div>
+        <div class="container">
+          <div class="card" *ngFor="let weather of displayWeather?.days">
+            <p class="date">
+              {{ weather.datetime }}
+            </p>
+            <p class="cityIcon">
+              {{ displayWeather.address }}
+              <span> <img [src]="getWeatherIcon(weather.icon)" alt="" /></span>
+            </p>
+            <p>{{ weather.temp }} °C</p>
+            <p class="desc">
+              {{ weather.description }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

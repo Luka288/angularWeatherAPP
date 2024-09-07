@@ -12,85 +12,133 @@ main {
   font-family: $main-font-roboto;
   background-color: $main-background-color;
 
-  .mainInfo {
+  .wrapper {
     width: 100%;
-    height: 200px;
-    @include flex();
-    color: $white-text;
+    min-height: 100%;
+    @include flex(space-between, center, row);
 
-    .city {
-      text-transform: capitalize;
-      font-weight: 370;
-      color: $white-text;
+    .hourly {
+      min-width: 200px;
+      height: 100vh;
+      min-height: 950px;
+      background-color: black;
     }
 
-    .underHeader {
-      @include flex($justify: space-between, $direction: row);
-      gap: 5px;
+    .secondBox {
+      width: 87%;
 
-      p {
+      .mainInfo {
+        width: 100%;
+        height: 400px;
+        @include flex();
         color: $white-text;
-        font-size: 10px;
-        font-weight: 250;
-      }
 
-      .Temp {
-        font-size: 31px;
-        font-weight: 350;
+        .city {
+          font-size: 43px;
+          text-transform: capitalize;
+          font-weight: 370;
+          color: $white-text;
+        }
 
-        .celsius {
+        .underHeader {
+          @include flex($justify: space-between, $direction: row);
+          gap: 5px;
+
+          p {
+            color: $white-text;
+            font-size: 10px;
+            font-weight: 250;
+          }
+
+          .Temp {
+            font-size: 37px;
+            font-weight: 350;
+
+            .celsius {
+              font-size: 16px;
+            }
+          }
+
+          img {
+            width: 65px;
+            height: 65px;
+          }
+        }
+        .condition {
           font-size: 16px;
+          font-weight: 270;
         }
       }
 
-      img {
-        width: 60px;
-        height: 60px;
-      }
-    }
-    .condition {
-      font-size: 16px;
-      font-weight: 270;
-    }
-  }
+      .foreCasts {
+        width: 100%;
+        height: 450px;
+        padding-top: 40px;
+        @include flex();
 
-  .foreCasts {
-    width: 100%;
-    @include flex();
-    padding-top: 40px;
+        .container {
+          width: 80%;
+          height: 220px;
+          @include flex(left, baseline, row);
+          gap: 30px;
+          overflow-y: hidden;
+          overflow-x: scroll;
 
-    .container {
-      width: 80%;
-      height: 220px;
-      @include flex(left, center, row);
-      gap: 30px;
-      overflow-y: hidden;
-      overflow-x: scroll;
+          .card {
+            @include flex(center, flex-start, column);
+            flex-wrap: wrap;
+            width: 350px;
+            color: $white-text;
 
-      .card {
-        @include flex(center, flex-start, column);
-        flex-wrap: wrap;
-        width: 150px;
-        color: $white-text;
+            .cityIcon {
+              text-transform: capitalize;
+              @include flex(center, center, row);
+              font-size: 25px;
 
-        .cityIcon {
-          text-transform: capitalize;
-          @include flex(center, center, row);
+              img {
+                width: 40px;
+                height: 40px;
+              }
+            }
 
-          img {
-            width: 30px;
-            height: 30px;
+            .desc {
+              font-weight: 240;
+              font-size: 12px;
+              width: 100px;
+            }
+
+            .date {
+              font-size: 16px;
+            }
           }
         }
 
-        .desc {
-          font-weight: 240;
-          font-size: 10px;
-          width: 100px;
-        }
+        .title {
+          width: 80%;
 
-        .date {
-          font-size: 10px;
+          .titleText {
+            color: $white-text;
+            padding-bottom: 30px;
+            font-size: 30px;
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    .wrapper {
+      .foreCasts {
+        width: 400px;
+        height: 450px;
+        padding-top: 40px;
+        @include flex();
+
+        .container {
+          width: 400px !important;
         }
       }
     }
