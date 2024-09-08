@@ -34,11 +34,6 @@
             />
             }
             <p class="Temp">{{ displayWeather?.currentConditions?.temp }} °C</p>
-            <p>
-              {{
-                displayWeather?.currentConditions?.datetimeEpoch | dateFormat
-              }}
-            </p>
           </div>
           <p class="condition">
             {{ displayWeather?.currentConditions?.conditions }}
