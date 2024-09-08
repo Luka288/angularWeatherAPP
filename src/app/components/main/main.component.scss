@@ -1,11 +1,6 @@
 @import "../../shared/styles/mixins/mixins.scss";
 @import "../../shared/styles/variables/variables.scss";
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
 main {
   width: 100%;
   min-height: 100vh;
@@ -84,7 +79,7 @@ main {
           overflow-y: hidden;
           overflow-x: scroll;
 
-          .card {
+          .Card {
             @include flex(center, flex-start, column);
             flex-wrap: wrap;
             width: 350px;
