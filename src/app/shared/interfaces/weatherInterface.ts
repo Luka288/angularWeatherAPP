@@ -44,34 +44,36 @@ export interface WeatherResponse {
       icon: string;
       stations: string[];
       source: string;
-      hours: {
-        datetime: string;
-        datetimeEpoch: number;
-        temp: number;
-        feelslike: number;
-        humidity: number;
-        dew: number;
-        precip: number;
-        precipprob: number;
-        snow: number;
-        snowdepth: number;
-        preciptype: string[];
-        windgust: number;
-        windspeed: number;
-        winddir: number;
-        pressure: number;
-        visibility: number;
-        cloudcover: number;
-        solarradiation: number;
-        solarenergy: number;
-        uvindex: number;
-        severerisk: number;
-        conditions: string;
-        icon: string;
-        stations: string[];
-        source: string;
-        datetimeInstance: string;
-      }[];
+      hours: [
+        {
+          datetime: string;
+          datetimeEpoch: number;
+          temp: number;
+          feelslike: number;
+          humidity: number;
+          dew: number;
+          precip: number;
+          precipprob: number;
+          snow: number;
+          snowdepth: number;
+          preciptype: string[];
+          windgust: number;
+          windspeed: number;
+          winddir: number;
+          pressure: number;
+          visibility: number;
+          cloudcover: number;
+          solarradiation: number;
+          solarenergy: number;
+          uvindex: number;
+          severerisk: number;
+          conditions: string;
+          icon: string;
+          stations: string[];
+          source: string;
+          datetimeInstance: string;
+        }
+      ]
       precipsum: number;
       precipsumnormal: number;
       snowsum: number;
@@ -122,4 +124,36 @@ export interface WeatherResponse {
       moonphase: number;
     };
   }
+
+
+  export interface hourlyRate {
+    datetime: string;
+    datetimeEpoch: number;
+    temp: number;
+    feelslike: number;
+    humidity: number;
+    dew: number;
+    precip: number;
+    precipprob: number;
+    snow: number;
+    snowdepth: number;
+    preciptype: string[];
+    windgust: number;
+    windspeed: number;
+    winddir: number;
+    pressure: number;
+    visibility: number;
+    cloudcover: number;
+    solarradiation: number;
+    solarenergy: number;
+    uvindex: number;
+    severerisk: number;
+    conditions: string;
+    icon: string;
+    stations: string[];
+    source: string;
+    datetimeInstance: string;
+  }
+
+  
   

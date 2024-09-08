@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { tap, catchError } from 'rxjs';
 import { WeatherAPIService } from '../../shared/services/weather-api.service';
-import { WeatherResponse } from '../../shared/interfaces/weatherInterface';
-import { CommonModule } from '@angular/common';
+import { hourlyRate, WeatherResponse } from '../../shared/interfaces/weatherInterface';
+import { CommonModule, formatDate } from '@angular/common';
 import { DateFormatPipe } from "../../shared/pipes/date-format.pipe";
 
 @Component({
@@ -17,6 +17,8 @@ export default class MainComponent {
 
   displayWeather: WeatherResponse | null = null;
   foreCast: WeatherResponse[] = [];
+  hourly: hourlyRate[] | null = null
+  dateFormating: number | null = null;
 
 
   readonly conditions: { [key: string]: string } = {
@@ -43,6 +45,8 @@ export default class MainComponent {
     'wind': 'assets/wind.png'
   }
 
+  isCurrentConditionInHourly: boolean = false
+
   ngOnInit(): void {
     this.loadWeather('tbilisi')
   }
@@ -50,6 +54,11 @@ export default class MainComponent {
   loadWeather(location: string){
     this.weatherAPI.getWeather(location).pipe(tap(res => {
       this.displayWeather = res
+
+      res.days.forEach(element => {
+        this.hourly = element.hours
+      })
+    
       console.log(res)
     })
       ).subscribe()

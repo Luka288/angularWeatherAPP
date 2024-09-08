@@ -1,14 +1,23 @@
 <main>
   <div class="wrapper">
     <div class="hourly">
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
+      <div class="hourlyWeather" *ngFor="let item of hourly">
+        <p>
+          {{ item.datetimeEpoch | dateFormat }}
+        </p>
+        <p>
+          {{ item.datetime }}
+        </p>
+        <p>
+          {{ item.conditions }}
+        </p>
+        <p>{{ item.temp }} °C</p>
+        @if (item.snow > 0) {
+        <p>
+          {{ item.snow }}
+        </p>
+        }
+      </div>
     </div>
     <div class="secondBox">
       <div class="upperContainer">
@@ -16,7 +25,7 @@
           <h1 class="city">
             {{ displayWeather?.resolvedAddress }}
           </h1>
-          <div class="underHeader" ng>
+          <div class="underHeader">
             @if (displayWeather?.currentConditions?.conditions) {
             <img
               *ngIf="displayWeather?.currentConditions?.icon"
@@ -25,13 +34,17 @@
             />
             }
             <p class="Temp">{{ displayWeather?.currentConditions?.temp }} °C</p>
+            <p>
+              {{
+                displayWeather?.currentConditions?.datetimeEpoch | dateFormat
+              }}
+            </p>
           </div>
           <p class="condition">
             {{ displayWeather?.currentConditions?.conditions }}
           </p>
         </div>
       </div>
-
       <div class="foreCasts" *ngIf="displayWeather">
         <div class="title">
           <p class="titleText">15 day fore cast</p>
