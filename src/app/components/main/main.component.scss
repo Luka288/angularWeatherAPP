@@ -21,7 +21,8 @@ main {
       overflow-y: scroll;
 
       .hourlyWeather {
-        border-bottom: 20px;
+        text-align: center;
+        border-bottom: 3px solid gainsboro;
       }
     }
 
