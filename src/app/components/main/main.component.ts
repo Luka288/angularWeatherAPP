@@ -19,6 +19,7 @@ export default class MainComponent {
   foreCast: WeatherResponse[] = [];
   hourly: hourlyRate[] | null = null
   dateFormating: number | null = null;
+  day: hourlyRate | null = null;
 
 
   readonly conditions: { [key: string]: string } = {
@@ -54,11 +55,8 @@ export default class MainComponent {
   loadWeather(location: string){
     this.weatherAPI.getWeather(location).pipe(tap(res => {
       this.displayWeather = res
-
-      res.days.forEach(element => {
-        this.hourly = element.hours
-      })
-    
+      this.hourly = res.days[0].hours
+      console.log(this.hourly)
       console.log(res)
     })
       ).subscribe()

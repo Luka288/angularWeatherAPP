@@ -21,12 +21,20 @@ main {
   font-family: $main-font-roboto;
   background-color: $main-background-color;
 
+  .header {
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+  }
+
   .wrapper {
     width: 100%;
     min-height: 100%;
     @include flex(space-between, center, row);
 
     .hourly {
+      width: 200px;
       min-width: 200px;
       height: 100vh;
       min-height: 950px;

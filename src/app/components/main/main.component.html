@@ -8,17 +8,11 @@
         <p>
           {{ item.datetime }}
         </p>
-        <p>
-          {{ item.conditions }}
-        </p>
         <p>{{ item.temp }} °C</p>
-        @if (item.snow > 0) {
-        <p>
-          {{ item.snow }}
-        </p>
-        }
+        <p>{{ item.conditions }}</p>
       </div>
     </div>
+
     <div class="secondBox">
       <div class="upperContainer">
         <div class="mainInfo">
