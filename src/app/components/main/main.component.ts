@@ -4,22 +4,29 @@ import { WeatherAPIService } from '../../shared/services/weather-api.service';
 import { hourlyRate, WeatherResponse } from '../../shared/interfaces/weatherInterface';
 import { CommonModule, formatDate } from '@angular/common';
 import { DateFormatPipe } from "../../shared/pipes/date-format.pipe";
+import { SearchWeatherService } from '../../shared/services/search-weather.service';
+import { RouterPreloader } from '@angular/router';
+import { geoLocation } from '../../shared/interfaces/geolocation';
+import { sweetAlertsService } from '../../shared/services/sweet-alerts.service';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, DateFormatPipe],
+  imports: [CommonModule, DateFormatPipe, ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
 export default class MainComponent {
   private readonly weatherAPI = inject(WeatherAPIService)
+  private readonly searchWeather = inject(SearchWeatherService)
+  private readonly alerts = inject(sweetAlertsService)
 
   displayWeather: WeatherResponse | null = null;
   foreCast: WeatherResponse[] = [];
   hourly: hourlyRate[] | null = null
   dateFormating: number | null = null;
   day: hourlyRate | null = null;
+  location: geoLocation | null = null;
 
 
   readonly conditions: { [key: string]: string } = {
@@ -46,10 +53,31 @@ export default class MainComponent {
     'wind': 'assets/wind.png'
   }
 
-  isCurrentConditionInHourly: boolean = false
+  accessToLocation: boolean = false
+
 
   ngOnInit(): void {
     this.loadWeather('tbilisi')
+    this.getSearch()
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition((pos: geoLocation) => {
+        this.accessToLocation = true
+        this.location = pos
+        console.log(this.accessToLocation)
+        console.log(pos)
+        this.alerts.toast('Weather Loaded Based Location', 'success', 'green')
+        this.weatherAPI.coordinatesWeather(pos.coords.latitude, pos.coords.longitude).pipe(tap(res => {
+          console.log(res)
+        })).subscribe()
+      },
+      (error: GeolocationPositionError) => {
+        if(error.PERMISSION_DENIED){  
+          this.accessToLocation = false
+          this.alerts.toast('loaction denied', 'error', 'red')
+        }
+      }
+    )
+    }
   }
 
   loadWeather(location: string){
@@ -65,6 +93,15 @@ export default class MainComponent {
 
   getWeatherIcon(condition: string | undefined): string {
     return this.conditions[condition || 'Unknown'] || '';
+  }
+
+  getSearch(){
+    this.searchWeather.searchValue$.subscribe(value => {
+      if (value) {
+        console.log(value);
+        this.loadWeather(value);
+      }
+    });
   }
 
 }

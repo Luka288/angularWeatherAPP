@@ -6,14 +6,21 @@
 />
 <nav class="navbar bg-dark">
   <div class="container-fluid">
-    <form class="d-flex" role="search">
+    <form
+      class="d-flex"
+      role="search"
+      (submit)="search($event, searchInput.value)"
+    >
       <input
         class="form-control me-2"
         type="search"
         placeholder="Search"
         aria-label="Search"
+        #searchInput
       />
-      <button class="btn btn-outline-primary" type="submit">Search</button>
+      <button class="btn btn-outline-primary" #value type="search">
+        Search
+      </button>
     </form>
   </div>
 </nav>
