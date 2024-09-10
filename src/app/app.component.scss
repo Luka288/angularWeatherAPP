@@ -2,4 +2,16 @@ nav {
   .container-fluid {
     padding-left: 15%;
   }
+
+  .github {
+    padding-right: 15%;
+    i {
+      font-size: 30px;
+    }
+    p {
+      align-items: center;
+      gap: 15px;
+      color: white;
+    }
+  }
 }

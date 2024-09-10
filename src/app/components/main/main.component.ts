@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { tap, catchError } from 'rxjs';
+import { tap, catchError, of, BehaviorSubject } from 'rxjs';
 import { WeatherAPIService } from '../../shared/services/weather-api.service';
 import { hourlyRate, WeatherResponse } from '../../shared/interfaces/weatherInterface';
 import { CommonModule, formatDate } from '@angular/common';
@@ -8,11 +8,15 @@ import { SearchWeatherService } from '../../shared/services/search-weather.servi
 import { RouterPreloader } from '@angular/router';
 import { geoLocation } from '../../shared/interfaces/geolocation';
 import { sweetAlertsService } from '../../shared/services/sweet-alerts.service';
+import { HeaderServiceService } from '../../shared/services/header-service.service';
+import { NgModule } from "@angular/core";
+import { NgxCubeLoaderComponent } from "ngx-cube-loader";
+import { RoundTempPipe } from "../../shared/pipes/round-temp.pipe";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, DateFormatPipe, ],
+  imports: [CommonModule, DateFormatPipe, NgxCubeLoaderComponent, RoundTempPipe],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
@@ -20,13 +24,24 @@ export default class MainComponent {
   private readonly weatherAPI = inject(WeatherAPIService)
   private readonly searchWeather = inject(SearchWeatherService)
   private readonly alerts = inject(sweetAlertsService)
+  private readonly headerBoolean = inject(HeaderServiceService)
 
+
+
+  // all the display properties
   displayWeather: WeatherResponse | null = null;
   foreCast: WeatherResponse[] = [];
   hourly: hourlyRate[] | null = null
   dateFormating: number | null = null;
   day: hourlyRate | null = null;
   location: geoLocation | null = null;
+  infoFromCoord: WeatherResponse | null = null;
+
+  // booleans
+  accessToLocation: boolean = false
+  searchLocation: boolean = false
+  searchBar: boolean = false
+  loading: boolean = true
 
 
   readonly conditions: { [key: string]: string } = {
@@ -53,21 +68,21 @@ export default class MainComponent {
     'wind': 'assets/wind.png'
   }
 
-  accessToLocation: boolean = false
 
 
   ngOnInit(): void {
-    this.loadWeather('tbilisi')
+    const memory = localStorage.getItem('searchMemory')
+    if(memory){
+      this.loadWeather(memory)
+    }
     this.getSearch()
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition((pos: geoLocation) => {
         this.accessToLocation = true
         this.location = pos
-        console.log(this.accessToLocation)
         console.log(pos)
-        this.alerts.toast('Weather Loaded Based Location', 'success', 'green')
         this.weatherAPI.coordinatesWeather(pos.coords.latitude, pos.coords.longitude).pipe(tap(res => {
-          console.log(res)
+          this.infoFromCoord = res
         })).subscribe()
       },
       (error: GeolocationPositionError) => {
@@ -81,13 +96,23 @@ export default class MainComponent {
   }
 
   loadWeather(location: string){
+    if(location === ''){
+      this.searchLocation = false;
+      this.searchBar = true
+      this.headerBoolean.isHeaderAvailable(false)
+      return
+    }
     this.weatherAPI.getWeather(location).pipe(tap(res => {
+      this.searchBar = false
+      this.searchLocation = true
       this.displayWeather = res
       this.hourly = res.days[0].hours
       console.log(this.hourly)
       console.log(res)
+      this.headerBoolean.isHeaderAvailable(true)
+      localStorage.setItem('searchMemory', location)
     })
-      ).subscribe()
+    ).subscribe()
   }
 
 
@@ -100,6 +125,7 @@ export default class MainComponent {
       if (value) {
         console.log(value);
         this.loadWeather(value);
+        localStorage.setItem('searchValue', value)
       }
     });
   }

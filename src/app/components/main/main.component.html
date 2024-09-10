@@ -1,5 +1,26 @@
 <main>
-  <div class="wrapper">
+  <div class="searchBar" *ngIf="searchBar">
+    <div class="inputs">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        #searchInput
+        (search)="loadWeather(searchInput.value)"
+      />
+      <button
+        class="btn btn-outline-primary"
+        #value
+        type="search"
+        (click)="loadWeather(searchInput.value)"
+      >
+        Search
+      </button>
+    </div>
+    <p>geo location access denied search the location u want to see</p>
+  </div>
+  <div class="wrapper" *ngIf="searchLocation">
     <div class="hourly">
       <div class="hourlyWeather" *ngFor="let item of hourly">
         <p>
@@ -8,9 +29,8 @@
         <p>
           {{ item.datetime }}
         </p>
-        <p>{{ item.temp }} °C</p>
+        <p>{{ item.temp | roundTemp }} °C</p>
         <p>{{ item.conditions }}</p>
-        <p></p>
       </div>
     </div>
 
@@ -18,6 +38,9 @@
       <div class="upperContainer">
         <div class="mainInfo">
           <h1 class="city">
+            <span class="cityAdress">
+              {{ displayWeather?.address }}
+            </span>
             {{ displayWeather?.resolvedAddress }}
           </h1>
           <div class="underHeader">
@@ -35,7 +58,7 @@
           </p>
         </div>
       </div>
-      <div class="foreCasts" *ngIf="displayWeather">
+      <div class="foreCasts" *ngIf="displayWeather && searchLocation">
         <div class="title">
           <p class="titleText">15 day fore cast</p>
         </div>

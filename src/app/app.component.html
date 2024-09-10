@@ -4,7 +4,11 @@
   href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
   rel="stylesheet"
 />
-<nav class="navbar bg-dark">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+/>
+<nav class="navbar bg-dark" *ngIf="isHeaderVisible">
   <div class="container-fluid">
     <form
       class="d-flex"
@@ -22,6 +26,14 @@
         Search
       </button>
     </form>
+    <div class="github">
+      <p class="d-flex correct">
+        <span>
+          <i class="fa-brands fa-github" style="color: #ffffff"></i>
+        </span>
+        Luka288
+      </p>
+    </div>
   </div>
 </nav>
 <router-outlet></router-outlet>
