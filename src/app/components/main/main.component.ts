@@ -130,4 +130,48 @@ export default class MainComponent {
     });
   }
 
+  setBg(){
+    switch (this.displayWeather?.currentConditions?.icon) {
+      case 'clear-day':
+        return 'assets/videos/clear-day.mp4';
+      case 'clear-night':
+        return 'assets/videos/clear-night.mp4';
+      case 'cloudy':
+        return 'assets/videos/cloudy.mp4';
+      case 'fog':
+        return 'assets/videos/fog.mp4';
+      case 'hail':
+        return '';
+      case 'partly-cloudy-day':
+        return '';
+      case 'partly-cloudy-night':
+        return '';
+      case 'rain-snow-showers-day':
+        return ''
+      case 'rain-snow-showers-night':
+        return ''
+      case 'rain-snow':
+        return 
+      case 'rain':
+        return 
+      case 'showers-day':
+        return
+      case 'showers-night':
+        return
+      case 'snow':
+        return
+      case 'thunder-rain':
+        return
+      case 'thunder-showers-day':
+        return
+      case 'thunder-showers-night':
+        return
+      case 'thunder':
+        return
+      case 'wind':
+        return
+      default:
+        return 'default';
+    }
+  }
 }
