@@ -1,5 +1,11 @@
 <main>
-  <video autoplay loop muted [src]="setBg()" class="bgVideo"></video>
+  <video
+    autoplay
+    loop
+    [muted]="'muted'"
+    [src]="setBg()"
+    class="bgVideo"
+  ></video>
 
   <div class="searchBar" *ngIf="searchBar">
     <div class="inputs">
