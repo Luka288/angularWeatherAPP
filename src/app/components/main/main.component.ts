@@ -134,42 +134,61 @@ export default class MainComponent {
     switch (this.displayWeather?.currentConditions?.icon) {
       case 'clear-day':
         return 'assets/videos/clear-day.mp4';
+
       case 'clear-night':
         return 'assets/videos/clear-night.mp4';
+
       case 'cloudy':
         return 'assets/videos/cloudy.mp4';
+
       case 'fog':
         return 'assets/videos/fog.mp4';
+
       case 'hail':
         return 'assets/videos/hail-weather.mp4';
+
       case 'partly-cloudy-day':
         return 'assets/videos/partly-cloudy-day.mp4';
+
       case 'partly-cloudy-night':
         return 'assets/videos/partly-cloudy-night.mp4';
+
       case 'rain-snow-showers-day':
         return 'assets/videos/rain-snow-showers-day.mp4'
+
       case 'rain-snow-showers-night':
-        return ''
+        return 'assets/videos/rain-snow-showers-night.mp4'
+
       case 'rain-snow':
-        return 
+        return 'assets/videos/rainSnow.mp4'
+
       case 'rain':
-        return 
+        return 'assets/videos/rain.mp4'
+
       case 'showers-day':
-        return
+        return 'assets/videos/showers-day.mp4'
+
       case 'showers-night':
-        return
+        return ''
+
       case 'snow':
-        return
+        return ''
+
       case 'thunder-rain':
-        return
+        return ''
+
       case 'thunder-showers-day':
-        return
+        return ''
+
       case 'thunder-showers-night':
-        return
+        return ''
+
       case 'thunder':
-        return
+        return ''
+
       case 'wind':
-        return
+        return ''
+
       default:
         return 'default';
     }
