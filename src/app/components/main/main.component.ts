@@ -145,9 +145,9 @@ export default class MainComponent {
       case 'partly-cloudy-day':
         return 'assets/videos/partly-cloudy-day.mp4';
       case 'partly-cloudy-night':
-        return '';
+        return 'assets/videos/partly-cloudy-night.mp4';
       case 'rain-snow-showers-day':
-        return ''
+        return 'assets/videos/rain-snow-showers-day.mp4'
       case 'rain-snow-showers-night':
         return ''
       case 'rain-snow':
