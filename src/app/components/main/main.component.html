@@ -66,6 +66,12 @@
           </p>
         </div>
       </div>
+      <div class="windSpeedEtc">
+        <p>
+          Wind speed: {{ displayWeather?.currentConditions?.windspeed }} M/S
+        </p>
+        <p>Wind Direction: {{ displayWeather?.currentConditions?.winddir }}°</p>
+      </div>
       <div class="foreCasts" *ngIf="displayWeather && searchLocation">
         <div class="title">
           <p class="titleText">15 day fore cast</p>

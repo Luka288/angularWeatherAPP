@@ -130,9 +130,11 @@ main {
       }
 
       .foreCasts {
-        width: 100%;
-        height: 450px;
+        width: 95%;
+        // height: 450px;
         padding-top: 40px;
+        backdrop-filter: blur(30px);
+        border-radius: 90px;
         @include flex();
 
         .container {
@@ -182,6 +184,16 @@ main {
             font-weight: 300;
           }
         }
+      }
+    }
+
+    .windSpeedEtc {
+      @include flex(center, center, row);
+      gap: 30px;
+      flex-wrap: wrap;
+
+      p {
+        color: white;
       }
     }
   }
