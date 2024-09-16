@@ -4,6 +4,6 @@ export const routes: Routes = [
     {
         path: '',
         loadComponent: () => import('./components/main/main.component'),
-        title: 'Home Page'
+        title: 'Weather'
     }
 ];

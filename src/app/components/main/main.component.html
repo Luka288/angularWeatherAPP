@@ -59,7 +59,9 @@
               alt="Weather-icon"
             />
             }
-            <p class="Temp">{{ displayWeather?.currentConditions?.temp }} °C</p>
+            <p class="Temp">
+              {{ (displayWeather?.currentConditions)!.temp | roundTemp }} °C
+            </p>
           </div>
           <p class="condition">
             {{ displayWeather?.currentConditions?.conditions }}
