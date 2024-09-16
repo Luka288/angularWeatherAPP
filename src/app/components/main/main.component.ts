@@ -169,25 +169,25 @@ export default class MainComponent {
         return 'assets/videos/showers-day.mp4'
 
       case 'showers-night':
-        return ''
+        return 'assets/videos/showers-night.mp4'
 
       case 'snow':
-        return ''
+        return 'assets/videos/snow.mp4'
 
       case 'thunder-rain':
-        return ''
+        return 'assets/videos/thunder-rain.mp4'
 
       case 'thunder-showers-day':
-        return ''
+        return 'assets/videos/thunder-showers-day.mp4'
 
       case 'thunder-showers-night':
-        return ''
+        return 'assets/videos/thunder-showers-night.mp4'
 
       case 'thunder':
-        return ''
+        return 'assets/videos/thunder.mp4'
 
       case 'wind':
-        return ''
+        return 'assets/videos/wind.mp4'
 
       default:
         return 'default';
