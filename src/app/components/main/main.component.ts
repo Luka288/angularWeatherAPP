@@ -69,11 +69,17 @@ export default class MainComponent {
   }
 
 
+  clear(){
+    localStorage.removeItem('searchMemory')
+  }
+
 
   ngOnInit(): void {
     const memory = localStorage.getItem('searchMemory')
     if(memory){
       this.loadWeather(memory)
+    }else if(!memory){
+      this.searchBar = true;
     }
     this.getSearch()
     if(navigator.geolocation){

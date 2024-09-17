@@ -18,12 +18,29 @@ export class AppComponent implements OnInit {
   private readonly headerService = inject(HeaderServiceService)
 
 
+  // variables
+  displayClock: string = ''
+
+  // Booleans
   isHeaderVisible: boolean = false
 
   ngOnInit(): void {
+    this.refreshClock()
     this.headerService.headerVisible$.pipe(tap(res => {
       this.isHeaderVisible = res
     })).subscribe()
+  }
+
+
+  refreshClock(){
+    setInterval(() => {
+      this.liveClock()
+    }, 1000);
+  }
+
+  liveClock(){
+    const date = new Date();  
+    this.displayClock = date.toLocaleTimeString();
   }
 
   search(event: Event, value: string){
