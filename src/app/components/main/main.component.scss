@@ -127,6 +127,10 @@ main {
           font-size: 16px;
           font-weight: 270;
         }
+
+        .Disable {
+          display: none;
+        }
       }
 
       .foreCasts {
@@ -265,6 +269,32 @@ main {
         .container {
           width: 200px !important;
         }
+      }
+
+      .secondBox {
+        .mainInfo {
+          .Disable {
+            display: block;
+          }
+
+          .offcanvas-title {
+            color: $white-text;
+          }
+
+          .offcanvas-body {
+            color: $white-text;
+
+            .hourlyWeather {
+              border-bottom: 1px solid white;
+            }
+          }
+        }
+      }
+    }
+
+    .wrapper {
+      .hourly {
+        display: none;
       }
     }
   }
