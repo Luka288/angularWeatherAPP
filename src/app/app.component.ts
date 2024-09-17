@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
 
   // Booleans
   isHeaderVisible: boolean = false
+  clockLoading: boolean = true;
 
   ngOnInit(): void {
     this.refreshClock()
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit {
   liveClock(){
     const date = new Date();  
     this.displayClock = date.toLocaleTimeString();
+    this.clockLoading = false;
   }
 
   search(event: Event, value: string){

@@ -27,6 +27,7 @@
       </button>
     </form>
     <div class="liveClock">
+      <p *ngIf="clockLoading">Loading Local Clock...</p>
       <p>
         {{ displayClock }}
       </p>
