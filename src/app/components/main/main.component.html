@@ -35,7 +35,7 @@
           {{ item.datetimeEpoch | dateFormat }}
         </p>
         <p>
-          {{ item.datetime }}
+          {{ timeFormat(item.datetime) }}
         </p>
         <p>{{ item.temp | roundTemp }} °C</p>
         <p>{{ item.conditions }}</p>
@@ -100,7 +100,7 @@
                   {{ item.datetimeEpoch | dateFormat }}
                 </p>
                 <p>
-                  {{ item.datetime }}
+                  {{ timeFormat(item.datetime) }}
                 </p>
                 <p>{{ item.temp | roundTemp }} °C</p>
                 <p>{{ item.conditions }}</p>

@@ -193,4 +193,25 @@ export default class MainComponent {
         return 'default';
     }
   }
+
+
+  timeFormat(time: string){
+    let [hours, minutes] = time.split(':');
+
+    let period = 'AM';
+
+
+    let hourNum = parseInt(hours, 10);
+
+    if(hourNum >= 12){
+      period = 'PM';
+      hourNum = hourNum > 12 ? hourNum - 12 : hourNum;
+    }
+
+    if(hourNum === 0){
+      hourNum = 12;
+    }
+
+    return `${hourNum}:${minutes} ${period}`
+  }
 }
