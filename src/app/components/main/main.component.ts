@@ -83,7 +83,6 @@ export default class MainComponent {
     }
     this.getSearch()
 
-    //  geolocation 
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition((pos: geoLocation) => {
         this.accessToLocation = true
