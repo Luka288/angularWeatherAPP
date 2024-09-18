@@ -82,23 +82,25 @@ export default class MainComponent {
       this.searchBar = true;
     }
     this.getSearch()
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition((pos: geoLocation) => {
-        this.accessToLocation = true
-        this.location = pos
-        console.log(pos)
-        this.weatherAPI.coordinatesWeather(pos.coords.latitude, pos.coords.longitude).pipe(tap(res => {
-          this.infoFromCoord = res
-        })).subscribe()
-      },
-      (error: GeolocationPositionError) => {
-        if(error.PERMISSION_DENIED){  
-          this.accessToLocation = false
-          this.alerts.toast('loaction denied', 'error', 'red')
-        }
-      }
-    )
-    }
+
+    //  geolocation 
+    // if(navigator.geolocation){
+    //   navigator.geolocation.getCurrentPosition((pos: geoLocation) => {
+    //     this.accessToLocation = true
+    //     this.location = pos
+    //     console.log(pos)
+    //     this.weatherAPI.coordinatesWeather(pos.coords.latitude, pos.coords.longitude).pipe(tap(res => {
+    //       this.infoFromCoord = res
+    //     })).subscribe()
+    //   },
+    //   (error: GeolocationPositionError) => {
+    //     if(error.PERMISSION_DENIED){  
+    //       this.accessToLocation = false
+    //       this.alerts.toast('loaction denied', 'error', 'red')
+    //     }
+    //   }
+    // )
+    // }
   }
 
   loadWeather(location: string){
