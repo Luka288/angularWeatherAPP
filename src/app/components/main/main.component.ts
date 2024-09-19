@@ -113,14 +113,13 @@ export default class MainComponent {
       this.searchLocation = true
       this.displayWeather = res
       this.hourly = res.days[0].hours
-      console.log(res)
       this.headerBoolean.isHeaderAvailable(true)
       localStorage.setItem('searchMemory', location)
     }), catchError(err => {
       if(err.status === 400){
         this.alerts.toast('City/Country Not Found', 'error', 'red')
       }
-        return EMPTY;
+      return EMPTY;
     })
     ).subscribe()
   }
@@ -140,67 +139,89 @@ export default class MainComponent {
   }
 
   setBg(){
+    let path = 'assets/videos/default.mp4'
     switch (this.displayWeather?.currentConditions?.icon) {
       case 'clear-day':
-        return 'assets/videos/clear-day.mp4';
+        path = 'assets/videos/clear-day.mp4';
+         break;
 
       case 'clear-night':
-        return 'assets/videos/clear-night.mp4';
+        path = 'assets/videos/clear-night.mp4';
+         break;
 
       case 'cloudy':
-        return 'assets/videos/cloudy.mp4';
+        path = 'assets/videos/cloudy.mp4';
+         break;
 
       case 'fog':
-        return 'assets/videos/fog.mp4';
+        path = 'assets/videos/fog.mp4';
+         break;
 
       case 'hail':
-        return 'assets/videos/hail-weather.mp4';
+        path = 'assets/videos/hail-weather.mp4';
+         break;
 
       case 'partly-cloudy-day':
-        return 'assets/videos/partly-cloudy-day.mp4';
+        path = 'assets/videos/partly-cloudy-day.mp4';
+         break;
 
       case 'partly-cloudy-night':
-        return 'assets/videos/partly-cloudy-night.mp4';
+        path = 'assets/videos/partly-cloudy-night.mp4';
+         break;
 
       case 'rain-snow-showers-day':
-        return 'assets/videos/rain-snow-showers-day.mp4'
+        path = 'assets/videos/rain-snow-showers-day.mp4'
+         break;
 
       case 'rain-snow-showers-night':
-        return 'assets/videos/rain-snow-showers-night.mp4'
+       path =  'assets/videos/rain-snow-showers-night.mp4'
+         break;
 
       case 'rain-snow':
-        return 'assets/videos/rainSnow.mp4'
+        path = 'assets/videos/rainSnow.mp4'
+         break;
 
       case 'rain':
-        return 'assets/videos/rain.mp4'
+        path = 'assets/videos/rain.mp4'
+         break;
 
       case 'showers-day':
-        return 'assets/videos/showers-day.mp4'
+        path = 'assets/videos/showers-day.mp4'
+         break;
 
       case 'showers-night':
-        return 'assets/videos/showers-night.mp4'
+        path = 'assets/videos/showers-night.mp4'
+         break;
 
       case 'snow':
-        return 'assets/videos/snow.mp4'
+        path = 'assets/videos/snow.mp4'
+         break;
 
       case 'thunder-rain':
-        return 'assets/videos/thunder-rain.mp4'
+        path = 'assets/videos/thunder-rain.mp4'
+         break;
 
       case 'thunder-showers-day':
-        return 'assets/videos/thunder-showers-day.mp4'
+        path = 'assets/videos/thunder-showers-day.mp4'
+         break;
 
       case 'thunder-showers-night':
-        return 'assets/videos/thunder-showers-night.mp4'
+        path = 'assets/videos/thunder-showers-night.mp4'
+         break;
 
       case 'thunder':
-        return 'assets/videos/thunder.mp4'
+        path = 'assets/videos/thunder.mp4'
+         break;
 
       case 'wind':
-        return 'assets/videos/wind.mp4'
+        path = 'assets/videos/wind.mp4'
+         break;
 
       default:
-        return 'default';
+        path = 'default';
+         break;
     }
+    return path;
   }
 
 
