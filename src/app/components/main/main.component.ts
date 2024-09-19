@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { tap, catchError, of, BehaviorSubject } from 'rxjs';
+import { tap, catchError, of, BehaviorSubject, EMPTY, ignoreElements } from 'rxjs';
 import { WeatherAPIService } from '../../shared/services/weather-api.service';
 import { hourlyRate, WeatherResponse } from '../../shared/interfaces/weatherInterface';
 import { CommonModule, formatDate } from '@angular/common';
@@ -113,10 +113,14 @@ export default class MainComponent {
       this.searchLocation = true
       this.displayWeather = res
       this.hourly = res.days[0].hours
-      console.log(this.hourly)
       console.log(res)
       this.headerBoolean.isHeaderAvailable(true)
       localStorage.setItem('searchMemory', location)
+    }), catchError(err => {
+      if(err.status === 400){
+        this.alerts.toast('City/Country Not Found', 'error', 'red')
+      }
+        return EMPTY;
     })
     ).subscribe()
   }
@@ -128,8 +132,7 @@ export default class MainComponent {
 
   getSearch(){
     this.searchWeather.searchValue$.subscribe(value => {
-      if (value) {
-        console.log(value);
+      if(value) {
         this.loadWeather(value);
         localStorage.setItem('searchValue', value)
       }
