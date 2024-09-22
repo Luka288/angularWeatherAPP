@@ -45,9 +45,10 @@ export class AppComponent implements OnInit {
     this.clockLoading = false;
   }
 
-  search(event: Event, value: string){
+  search(event: Event, value: string, searchInput: HTMLInputElement){
     this.searchWeather.setSearchValue(value)
     event.preventDefault();
+    searchInput.value = ''
   }
 
 }

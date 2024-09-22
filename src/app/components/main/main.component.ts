@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { tap, catchError, of, BehaviorSubject, EMPTY, ignoreElements } from 'rxjs';
 import { WeatherAPIService } from '../../shared/services/weather-api.service';
 import { hourlyRate, WeatherResponse } from '../../shared/interfaces/weatherInterface';
@@ -12,6 +12,8 @@ import { HeaderServiceService } from '../../shared/services/header-service.servi
 import { NgModule } from "@angular/core";
 import { NgxCubeLoaderComponent } from "ngx-cube-loader";
 import { RoundTempPipe } from "../../shared/pipes/round-temp.pipe";
+import { R3SelectorScopeMode } from '@angular/compiler';
+import { LocationService } from '../../shared/services/location.service';
 
 @Component({
   selector: 'app-main',
@@ -25,6 +27,9 @@ export default class MainComponent {
   private readonly searchWeather = inject(SearchWeatherService)
   private readonly alerts = inject(sweetAlertsService)
   private readonly headerBoolean = inject(HeaderServiceService)
+  private readonly currService = inject(LocationService)
+  private readonly cdr = inject(ChangeDetectorRef)
+
 
 
 
@@ -79,26 +84,35 @@ export default class MainComponent {
     if(memory){
       this.loadWeather(memory)
     }else if(!memory){
+      this.loadCurr()
       this.searchBar = true;
     }
     this.getSearch()
+    //! built in geo location (turned off)
+    // if(navigator.geolocation){
+    //   navigator.geolocation.getCurrentPosition((pos: geoLocation) => {
+    //     this.accessToLocation = true
+    //     this.location = pos
+    //     this.weatherAPI.coordinatesWeather(pos.coords.latitude, pos.coords.longitude).pipe(tap(res => {
+    //       this.infoFromCoord = res
+    //     })).subscribe()
+    //   },
+    //   (error: GeolocationPositionError) => {
+    //     if(error.PERMISSION_DENIED){  
+    //       this.accessToLocation = false
+    //       this.alerts.toast('loaction denied', 'error', 'red')
+    //     }
+    //   }
+    // )
+    // }
+  }
 
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition((pos: geoLocation) => {
-        this.accessToLocation = true
-        this.location = pos
-        this.weatherAPI.coordinatesWeather(pos.coords.latitude, pos.coords.longitude).pipe(tap(res => {
-          this.infoFromCoord = res
-        })).subscribe()
-      },
-      (error: GeolocationPositionError) => {
-        if(error.PERMISSION_DENIED){  
-          this.accessToLocation = false
-          this.alerts.toast('loaction denied', 'error', 'red')
-        }
-      }
-    )
-    }
+
+  // custom geo location API 
+  loadCurr(){
+    this.currService.getCurr().pipe(tap(res => {
+      this.loadWeather(res.city)
+    })).subscribe()
   }
 
   loadWeather(location: string){
