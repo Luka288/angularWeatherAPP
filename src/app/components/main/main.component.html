@@ -7,7 +7,12 @@
     class="bgVideo"
   ></video>
   <div class="searchBar" *ngIf="searchBar">
-    <div class="inputs">
+    <ngx-cube-loader
+      class="customLoader"
+      colorSet="cyan"
+      *ngIf="loadingScreen"
+    ></ngx-cube-loader>
+    <div class="inputs" *ngIf="checkCurr">
       <input
         class="form-control me-2"
         type="search"
@@ -25,7 +30,9 @@
         Search
       </button>
     </div>
-    <p>geo location access denied search the location u want to see</p>
+    <p *ngIf="checkCurr">
+      could not find geo location please enter your location
+    </p>
   </div>
   <div class="wrapper" *ngIf="searchLocation">
     <div class="hourly">

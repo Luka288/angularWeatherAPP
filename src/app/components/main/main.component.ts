@@ -12,8 +12,8 @@ import { HeaderServiceService } from '../../shared/services/header-service.servi
 import { NgModule } from "@angular/core";
 import { NgxCubeLoaderComponent } from "ngx-cube-loader";
 import { RoundTempPipe } from "../../shared/pipes/round-temp.pipe";
-import { R3SelectorScopeMode } from '@angular/compiler';
 import { LocationService } from '../../shared/services/location.service';
+
 
 @Component({
   selector: 'app-main',
@@ -47,6 +47,8 @@ export default class MainComponent {
   searchLocation: boolean = false
   searchBar: boolean = false
   loading: boolean = true
+  loadingScreen: boolean = true
+  checkCurr: boolean = false
 
 
   readonly conditions: { [key: string]: string } = {
@@ -74,6 +76,8 @@ export default class MainComponent {
   }
 
 
+
+  //for testing purposes only
   clear(){
     localStorage.removeItem('searchMemory')
   }
@@ -112,6 +116,16 @@ export default class MainComponent {
   loadCurr(){
     this.currService.getCurr().pipe(tap(res => {
       this.loadWeather(res.city)
+      this.loadingScreen = false;
+
+      //if api could not find location (worst case)
+      this.checkCurr = false
+    }), catchError(err => {
+      if(err.ok === false){
+        this.loadingScreen = false;
+        this.checkCurr = true;
+      }
+      return 'Error'
     })).subscribe()
   }
 

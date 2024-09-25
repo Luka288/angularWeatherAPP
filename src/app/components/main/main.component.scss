@@ -46,6 +46,9 @@ main {
         width: 350px;
       }
     }
+    p {
+      text-transform: capitalize;
+    }
 
     p {
       color: $white-text;
